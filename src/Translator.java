@@ -15,8 +15,12 @@ public class Translator {
 	 * Hier in diesem static-Block werden die beiden Wörterbücher gebildet.
 	 */
 	static {
-
+     //Arbeite bei der Hinübersetzung ins Lateinische mit Groß- bei der Herübersetzung mit Kleinbuchstaben. 
 		TO_LATIN.put(" ", " ");
+		TO_LATIN.put("\"", "?"); ////TODO
+		TO_LATIN.put("?", "?");
+		TO_LATIN.put(".", ".");
+		TO_LATIN.put("!", "!");
 		TO_LATIN.put(new String(Character.toChars(0x10C80)), "A");
 		TO_LATIN.put(new String(Character.toChars(0x10C81)), "Á");
 		TO_LATIN.put(new String(Character.toChars(0x10C82)), "B");
@@ -72,6 +76,10 @@ public class Translator {
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		TO_SZKLY.put(" ", " ");
+		TO_SZKLY.put("\"", "?"); ////TODO
+		TO_SZKLY.put("?", "?");
+		TO_SZKLY.put(".", ".");
+		TO_SZKLY.put("!", "!");
 		TO_SZKLY.put("a", new String(Character.toChars(0x10C80)));
 		TO_SZKLY.put("á", new String(Character.toChars(0x10C81)));
 		TO_SZKLY.put("b", new String(Character.toChars(0x10C82)));
@@ -239,7 +247,7 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(sb.toString());
+			topTextArea.setText(punctuation(sb.toString()));
 
 		}
 
@@ -258,7 +266,7 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(sb.toString());
+			topTextArea.setText(punctuation(sb.toString()));
 		}
 
 		else if (sbLatin.length() >= 2 && sbLatin.substring(sbLatin.length() - 2).equals("ly")
@@ -276,7 +284,7 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(sb.toString());
+			topTextArea.setText(punctuation(sb.toString()));
 
 		}
 
@@ -295,7 +303,7 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(sb.toString());
+			topTextArea.setText(punctuation(sb.toString()));
 		}
 
 		else if (sbLatin.length() >= 2 && sbLatin.substring(sbLatin.length() - 2).equals("gy")
@@ -313,7 +321,7 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(sb.toString());
+			topTextArea.setText(punctuation(sb.toString()));
 
 		}
 
@@ -332,7 +340,7 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(sb.toString());
+			topTextArea.setText(punctuation(sb.toString()));
 		}
 
 		else if (sbLatin.length() >= 2 && sbLatin.substring(sbLatin.length() - 2).equals("ny")
@@ -350,7 +358,7 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(sb.toString());
+			topTextArea.setText(punctuation(sb.toString()));
 
 		}
 
@@ -369,7 +377,7 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(sb.toString());
+			topTextArea.setText(punctuation(sb.toString()));
 		}
 
 		else if (sbLatin.length() >= 2 && sbLatin.substring(sbLatin.length() - 2).equals("sz")
@@ -387,7 +395,7 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(sb.toString());
+			topTextArea.setText(punctuation(sb.toString()));
 
 		}
 
@@ -406,7 +414,7 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(sb.toString());
+			topTextArea.setText(punctuation(sb.toString()));
 		}
 
 		else if (sbLatin.length() >= 2 && sbLatin.substring(sbLatin.length() - 2).equals("zs")
@@ -424,7 +432,7 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(sb.toString());
+			topTextArea.setText(punctuation(sb.toString()));
 
 		}
 
@@ -443,7 +451,7 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(sb.toString());
+			topTextArea.setText(punctuation(sb.toString()));
 		}
 
 		else if (sbLatin.length() >= 2 && sbLatin.substring(sbLatin.length() - 2).equals("ty")
@@ -461,7 +469,7 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(sb.toString());
+			topTextArea.setText(punctuation(sb.toString()));
 
 		}
 
@@ -480,16 +488,35 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(sb.toString());
+			topTextArea.setText(punctuation(sb.toString()));
 		}
 
 		else {
 
 			sb.append(Translator.translateToSzkly(entry));
 
-			topTextArea.setText(sb.toString());
+			topTextArea.setText(punctuation(sb.toString()));
 
-		}
+		} 
+	}
+
+	private static String punctuation(String str) {
+
+	   ////TODO
+		if(str.endsWith("?") || str.endsWith(".") || str.endsWith("!")) {
+			    
+			   if (str == null || str.length() <= 1) {
+		            return str;
+		        }
+		        // Letztes Zeichen extrahieren
+		        char lastChar = str.charAt(str.length() - 1);
+		        // Neues String mit dem letzten Zeichen vorne
+		        return lastChar + str.substring(0, str.length() - 1);
+			     
+ 
+			}
+	
+		 	return str;
 	}
 
 }

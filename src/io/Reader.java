@@ -9,17 +9,22 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Locale;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import core.Alphabets;
 import core.Translator;
+import i18n.I18n;
 
 /**
  * Ein Objekt der Klasse <code>ReaderOldHungarian</code>
  */
 public class Reader {
 
+	private static final I18n I18N = I18n.getInstance(Locale.getDefault());
+	
 	private Alphabets alphabet;
 	private Font loadedFont;
 
@@ -70,7 +75,7 @@ public class Reader {
 				content = Translator.translateToOldHungarianEntireText(new StringBuilder(content)).toString();
 			}
 
-			showTextWindow(content);
+			showTextWindow(content); 
 		});
 	}
 
@@ -95,16 +100,16 @@ public class Reader {
 		textArea.setLineWrap(true);
 		textArea.setEditable(false);
 
-		JButton saveButton = new JButton("save");
+		JButton saveButton = new JButton(I18N.getValue("Save"));
 		saveButton.setMinimumSize(new Dimension(100, 30));
 		saveButton.addActionListener(e -> saveFile(frame, textArea));
 
-		JButton clearButton = new JButton("clear");
+		JButton clearButton = new JButton("Del");
 		clearButton.setMinimumSize(new Dimension(100, 30));
 		clearButton.addActionListener(e -> textArea.setText(""));
 
 		// JButton erstellen
-		JButton copyButton = new JButton("copy");
+		JButton copyButton = new JButton(I18N.getValue("Copy"));
 		copyButton.setMinimumSize(new Dimension(100, 30));
 		frame.add(copyButton, BorderLayout.SOUTH);
 

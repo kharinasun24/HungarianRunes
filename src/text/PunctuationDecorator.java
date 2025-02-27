@@ -5,6 +5,7 @@ import log.MyLogger;
 
 public class PunctuationDecorator extends TextProcessorDecorator {
 	
+	@SuppressWarnings("unused")
 	private static final MyLogger LOGGER  = new MyLogger(Main.class);
 	
     public PunctuationDecorator(TextProcessor wrappedProcessor) {
@@ -14,7 +15,7 @@ public class PunctuationDecorator extends TextProcessorDecorator {
     @Override
     public String process(String str) {
     	
-    	LOGGER.info("If there is a punctuation mark at the right hand side, ithas to be moved to the left.");
+    	// LOGGER.info("If there is a punctuation mark at the right hand side, ithas to be moved to the left.");
     	
         str = wrappedProcessor.process(str); // Vorherige Verarbeitung
         if (str.endsWith("?") || str.endsWith(".") || str.endsWith("!")) {

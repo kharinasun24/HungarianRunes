@@ -28,9 +28,12 @@ import javax.swing.JTextArea;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import i18n.I18n;
 import io.Reader;
 import log.MyLogger;
 
+import java.util.Locale;
 
 /**
  * The class <code>Main</code> generates a JFrame with two TextAreas. In the
@@ -43,7 +46,10 @@ import log.MyLogger;
 public class Main { 
 
 	private static final MyLogger LOGGER  = new MyLogger(Main.class);
-	 
+	
+	private static final I18n I18N = I18n.getInstance(Locale.getDefault());
+
+	
 	/**
 	 * Die Methode <code>main</code>
 	 */
@@ -169,14 +175,14 @@ public class Main {
 			}
 		});
 
-		JButton saveButton = new JButton("Speichern");
+		JButton saveButton = new JButton(I18N.getValue("Save"));  
 		saveButton.setMinimumSize(new Dimension(100, 30));
 		saveButton.addActionListener(e -> {
 			fileChoser(sb, frame, topTextArea);
 		});
 
 		// "Delete First"-Button
-		JButton readButtonRunes = new JButton("Read Runes");
+		JButton readButtonRunes = new JButton(I18N.getValue("ReadRunes"));
 		readButtonRunes.setMinimumSize(new Dimension(110, 30));
 		readButtonRunes.addActionListener(e -> {
 
@@ -185,7 +191,7 @@ public class Main {
 		});
 
 		// "Delete First"-Button
-		JButton readButtonLatin = new JButton("Read Latin");
+		JButton readButtonLatin = new JButton(I18N.getValue("ReadLatin"));
 		readButtonLatin.setMinimumSize(new Dimension(110, 30));
 		readButtonLatin.addActionListener(e -> {
 
@@ -195,7 +201,7 @@ public class Main {
 		});
 
 		// JButton erstellen
-		JButton copyButton = new JButton("Kopieren");
+		JButton copyButton = new JButton(I18N.getValue("Copy"));
 		copyButton.setMinimumSize(new Dimension(100, 30));
 
 		// ActionListener für den Button

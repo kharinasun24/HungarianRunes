@@ -1,3 +1,4 @@
+package io;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -10,6 +11,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import core.Alphabets;
+import core.Translator;
 
 /**
  * Ein Objekt der Klasse <code>ReaderOldHungarian</code>
@@ -127,8 +131,6 @@ public class Reader {
 		frame.add(buttonPanel, BorderLayout.SOUTH);
 		frame.setVisible(true);
 	}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private Path chooseFile() {
 		JFileChooser fileChooser = new JFileChooser(new File(System.getProperty("user.home"), "Desktop"));

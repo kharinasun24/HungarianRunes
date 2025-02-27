@@ -1,13 +1,22 @@
+package core;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JTextArea;
+
+import log.MyLogger;
+import text.BasicTextProcessor;
+import text.NumbersDecorator;
+import text.PunctuationDecorator;
 
 /**
  * Die Klasse <code>Translator</code>
  */
 public class Translator {
 
+	private static final MyLogger LOGGER  = new MyLogger(Translator.class);
+	
 	private static final Map<String, String> TO_LATIN = new HashMap<>();
 	private static final Map<String, String> TO_SZKLY = new HashMap<>();
 
@@ -15,12 +24,28 @@ public class Translator {
 	 * Hier in diesem static-Block werden die beiden Wörterbücher gebildet.
 	 */
 	static {
-     //Arbeite bei der Hinübersetzung ins Lateinische mit Groß- bei der Herübersetzung mit Kleinbuchstaben. 
+		// Arbeite bei der Hinübersetzung ins Lateinische mit Groß- bei der
+		// Herübersetzung mit Kleinbuchstaben.
 		TO_LATIN.put(" ", " ");
-		TO_LATIN.put("\"", "?"); ////TODO
+		TO_LATIN.put("\"", "?"); //// TODO
 		TO_LATIN.put("?", "?");
 		TO_LATIN.put(".", ".");
 		TO_LATIN.put("!", "!");
+		TO_LATIN.put("1", "1");
+		TO_LATIN.put("2", "2");
+		TO_LATIN.put("0", "0");
+		TO_LATIN.put("3", "3");
+		TO_LATIN.put("4", "4");
+		TO_LATIN.put("5", "5");
+		TO_LATIN.put("6", "6");
+		TO_LATIN.put("7", "7");
+		TO_LATIN.put("8", "8");
+		TO_LATIN.put("9", "9");
+		TO_LATIN.put("+", "+");
+		TO_LATIN.put("-", "-");
+		TO_LATIN.put("/", "/");
+		TO_LATIN.put("*", "*");
+		TO_LATIN.put("=", "=");
 		TO_LATIN.put(new String(Character.toChars(0x10C80)), "A");
 		TO_LATIN.put(new String(Character.toChars(0x10C81)), "Á");
 		TO_LATIN.put(new String(Character.toChars(0x10C82)), "B");
@@ -76,10 +101,25 @@ public class Translator {
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		TO_SZKLY.put(" ", " ");
-		TO_SZKLY.put("\"", "?"); ////TODO
+		TO_SZKLY.put("\"", "?"); //// TODO i18n.
 		TO_SZKLY.put("?", "?");
 		TO_SZKLY.put(".", ".");
 		TO_SZKLY.put("!", "!");
+		TO_SZKLY.put("1", "1");
+		TO_SZKLY.put("2", "2");
+		TO_SZKLY.put("0", "0");
+		TO_SZKLY.put("3", "3");
+		TO_SZKLY.put("4", "4");
+		TO_SZKLY.put("5", "5");
+		TO_SZKLY.put("6", "6");
+		TO_SZKLY.put("7", "7");
+		TO_SZKLY.put("8", "8");
+		TO_SZKLY.put("9", "9");
+		TO_SZKLY.put("+", "+");
+		TO_SZKLY.put("-", "-");
+		TO_SZKLY.put("/", "/");
+		TO_SZKLY.put("*", "*");
+		TO_SZKLY.put("=", "=");
 		TO_SZKLY.put("a", new String(Character.toChars(0x10C80)));
 		TO_SZKLY.put("á", new String(Character.toChars(0x10C81)));
 		TO_SZKLY.put("b", new String(Character.toChars(0x10C82)));
@@ -137,6 +177,8 @@ public class Translator {
 	 */
 	public static StringBuilder translateToOldHungarianEntireText(StringBuilder text) {
 
+		LOGGER.info("Translating entire text to Old Hungarian.");
+		
 		String input = text.toString();
 
 		input = input.replaceAll("\\s+", " ");
@@ -159,6 +201,8 @@ public class Translator {
 	 */
 	public static StringBuilder translateToLatinEntireText(StringBuilder text) {
 
+		LOGGER.info("Translating entire text to Latin.");
+		
 		String input = text.toString();
 
 		input = input.replaceAll("\\s+", " ");
@@ -247,7 +291,8 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(punctuation(sb.toString()));
+			topTextArea.setText(
+					new PunctuationDecorator(new NumbersDecorator(new BasicTextProcessor())).process(sb.toString()));
 
 		}
 
@@ -266,7 +311,8 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(punctuation(sb.toString()));
+			topTextArea.setText(
+					new PunctuationDecorator(new NumbersDecorator(new BasicTextProcessor())).process(sb.toString()));
 		}
 
 		else if (sbLatin.length() >= 2 && sbLatin.substring(sbLatin.length() - 2).equals("ly")
@@ -284,7 +330,8 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(punctuation(sb.toString()));
+			topTextArea.setText(
+					new PunctuationDecorator(new NumbersDecorator(new BasicTextProcessor())).process(sb.toString()));
 
 		}
 
@@ -303,7 +350,8 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(punctuation(sb.toString()));
+			topTextArea.setText(
+					new PunctuationDecorator(new NumbersDecorator(new BasicTextProcessor())).process(sb.toString()));
 		}
 
 		else if (sbLatin.length() >= 2 && sbLatin.substring(sbLatin.length() - 2).equals("gy")
@@ -321,7 +369,8 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(punctuation(sb.toString()));
+			topTextArea.setText(
+					new PunctuationDecorator(new NumbersDecorator(new BasicTextProcessor())).process(sb.toString()));
 
 		}
 
@@ -340,7 +389,8 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(punctuation(sb.toString()));
+			topTextArea.setText(
+					new PunctuationDecorator(new NumbersDecorator(new BasicTextProcessor())).process(sb.toString()));
 		}
 
 		else if (sbLatin.length() >= 2 && sbLatin.substring(sbLatin.length() - 2).equals("ny")
@@ -358,7 +408,8 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(punctuation(sb.toString()));
+			topTextArea.setText(
+					new PunctuationDecorator(new NumbersDecorator(new BasicTextProcessor())).process(sb.toString()));
 
 		}
 
@@ -377,7 +428,8 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(punctuation(sb.toString()));
+			topTextArea.setText(
+					new PunctuationDecorator(new NumbersDecorator(new BasicTextProcessor())).process(sb.toString()));
 		}
 
 		else if (sbLatin.length() >= 2 && sbLatin.substring(sbLatin.length() - 2).equals("sz")
@@ -395,7 +447,8 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(punctuation(sb.toString()));
+			topTextArea.setText(
+					new PunctuationDecorator(new NumbersDecorator(new BasicTextProcessor())).process(sb.toString()));
 
 		}
 
@@ -414,7 +467,8 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(punctuation(sb.toString()));
+			topTextArea.setText(
+					new PunctuationDecorator(new NumbersDecorator(new BasicTextProcessor())).process(sb.toString()));
 		}
 
 		else if (sbLatin.length() >= 2 && sbLatin.substring(sbLatin.length() - 2).equals("zs")
@@ -432,7 +486,8 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(punctuation(sb.toString()));
+			topTextArea.setText(
+					new PunctuationDecorator(new NumbersDecorator(new BasicTextProcessor())).process(sb.toString()));
 
 		}
 
@@ -451,7 +506,8 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(punctuation(sb.toString()));
+			topTextArea.setText(
+					new PunctuationDecorator(new NumbersDecorator(new BasicTextProcessor())).process(sb.toString()));
 		}
 
 		else if (sbLatin.length() >= 2 && sbLatin.substring(sbLatin.length() - 2).equals("ty")
@@ -469,7 +525,8 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(punctuation(sb.toString()));
+			topTextArea.setText(
+					new PunctuationDecorator(new NumbersDecorator(new BasicTextProcessor())).process(sb.toString()));
 
 		}
 
@@ -488,35 +545,33 @@ public class Translator {
 				sb.delete(index, index + runeToRemove.length());
 			}
 
-			topTextArea.setText(punctuation(sb.toString()));
+			topTextArea.setText(
+					new PunctuationDecorator(new NumbersDecorator(new BasicTextProcessor())).process(sb.toString()));
 		}
 
 		else {
 
 			sb.append(Translator.translateToSzkly(entry));
 
-			topTextArea.setText(punctuation(sb.toString()));
+			topTextArea.setText(
+					new PunctuationDecorator(new NumbersDecorator(new BasicTextProcessor())).process(sb.toString()));
 
-		} 
+		}
 	}
 
-	private static String punctuation(String str) {
-
-	   ////TODO
-		if(str.endsWith("?") || str.endsWith(".") || str.endsWith("!")) {
-			    
-			   if (str == null || str.length() <= 1) {
-		            return str;
-		        }
-		        // Letztes Zeichen extrahieren
-		        char lastChar = str.charAt(str.length() - 1);
-		        // Neues String mit dem letzten Zeichen vorne
-		        return lastChar + str.substring(0, str.length() - 1);
-			     
- 
-			}
-	
-		 	return str;
-	}
-
+	/*
+	 * private static String punctuation(String str) {
+	 * 
+	 * ////TODO if(str.endsWith("?") || str.endsWith(".") || str.endsWith("!")) {
+	 * 
+	 * if (str == null || str.length() <= 1) { return str; } // Letztes Zeichen
+	 * extrahieren char lastChar = str.charAt(str.length() - 1); // Neues String mit
+	 * dem letzten Zeichen vorne return lastChar + str.substring(0, str.length() -
+	 * 1);
+	 * 
+	 * 
+	 * }
+	 * 
+	 * return str; }
+	 */
 }

@@ -22,7 +22,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -51,13 +50,6 @@ public class Main {
 	
 	private static final I18n I18N = I18n.getInstance(Locale.getDefault());
 
-	
-	// TODO: Eine weitere Funktion wäre ein Button Q, der eine TextArea öffnet,
-	//in diese soll dann ein Runentext hineingepastet werden können, und diese
-	//TextArea braucht dann zwei Knöpfe, Del und Trans, letzterer ist dann wür die Über
-	//setzung in dasselbe Fenster zuständig.
-	
-	
 	/**
 	 * Die Methode <code>main</code>
 	 */

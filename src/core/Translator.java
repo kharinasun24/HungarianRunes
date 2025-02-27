@@ -11,7 +11,7 @@ import text.NumbersDecorator;
 import text.PunctuationDecorator;
 
 /**
- * Die Klasse <code>Translator</code>
+ * The class <code>Translator</code>
  */
 public class Translator {
 
@@ -85,6 +85,7 @@ public class Translator {
 		TO_LATIN.put(new String(Character.toChars(0x10C9B)), "NY");
 		TO_LATIN.put(new String(Character.toChars(0x10CA8)), "TY");
 		TO_LATIN.put(new String(Character.toChars(0x10CA5)), "SZ");
+		TO_LATIN.put( new String(Character.toChars(0x10CB0)), "ZS");
 		String szkCSCS = new String(Character.toChars(0x10C86)) + new String(Character.toChars(0x10C86));
 		TO_LATIN.put(szkCSCS, "CCS");
 		String szkGYGY = new String(Character.toChars(0x10C8E)) + new String(Character.toChars(0x10C8E));
@@ -170,10 +171,10 @@ public class Translator {
 	}
 
 	/**
-	 * Die Klasse <code> translateToOldHungarianEntireText</code> übersetzt den
-	 * gesamten Text in altungar. Schrift.
+	 * The class <code> translateToOldHungarianEntireText</code> translates the
+	 * whole text into Old Hungarian Writing.
 	 * 
-	 * @param text: der zu übersetzendeText
+	 * @param text: text to translate
 	 */
 	public static StringBuilder translateToOldHungarianEntireText(StringBuilder text) {
 
@@ -194,10 +195,10 @@ public class Translator {
 	}
 
 	/**
-	 * Die Klasse <code>translateToLatinEntireText</code> übersetzt den gesamten
-	 * Text in lateinische Schrift.
+	 * The class <code>translateToLatinEntireText</code> translates the whole
+	 * text into Latin writing.
 	 * 
-	 * @param text: der zu übersetzendeText
+	 * @param text: text to translate
 	 */
 	public static StringBuilder translateToLatinEntireText(StringBuilder text) {
 
@@ -230,8 +231,8 @@ public class Translator {
 	}
 
 	/**
-	 * Die Methode <code> translatorLatinRepeatedLetters</code> ist für die korrekte
-	 * Übersetzung der Doppelbuchstaben in der Herübersetzung aus Runen zuständig.
+	 * The method <code> translatorLatinRepeatedLetters</code> takes care of the
+	 * correct translation of double letters from runes.
 	 * 
 	 * @param input
 	 * @param result
@@ -254,8 +255,8 @@ public class Translator {
 	}
 
 	/**
-	 * Die Methode <code>translatorOldHungarian</code> ist für die korrekte
-	 * Übersetzung der Doppelbuchstaben in der Hinübersetzung in Runen zuständig.
+	 * The method <code>translatorOldHungarian</code> takes care of the correct
+	 * correct translation of double letters into runes.
 	 * 
 	 * @param sb
 	 * @param sbLatin

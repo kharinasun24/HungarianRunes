@@ -19,7 +19,7 @@ import core.Translator;
 import i18n.I18n;
 
 /**
- * Ein Objekt der Klasse <code>ReaderOldHungarian</code>
+ * An object of class <code>ReaderOldHungarian</code>
  */
 public class Reader {
 
@@ -29,7 +29,7 @@ public class Reader {
 	private Font loadedFont;
 
 	/**
-	 * Konstruktor; lädt die Schriftart.
+	 * Construktor; loads font.
 	 * 
 	 * @param alphabet
 	 */
@@ -39,8 +39,8 @@ public class Reader {
 	}
 
 	/**
-	 * Setzt die Schriftart, diese wird für die Hin- und für die Herübersetzung
-	 * benötigt.
+	 * Sets font.
+	 * Needed for translation.
 	 */
 	private void loadFont() {
 		try {
@@ -55,7 +55,7 @@ public class Reader {
 	}
 
 	/**
-	 * Liest die Datei ein und übersetzt diese.
+	 * Reads file and translates it.
 	 */
 	public void read() {
 		SwingUtilities.invokeLater(() -> {
@@ -80,7 +80,7 @@ public class Reader {
 	}
 
 	/**
-	 * Zeigt den übersetzten Text
+	 * Shows translated text.
 	 * 
 	 * @param text
 	 */

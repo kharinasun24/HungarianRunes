@@ -19,8 +19,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -50,6 +52,12 @@ public class Main {
 	private static final I18n I18N = I18n.getInstance(Locale.getDefault());
 
 	
+	// TODO: Eine weitere Funktion wäre ein Button Q, der eine TextArea öffnet,
+	//in diese soll dann ein Runentext hineingepastet werden können, und diese
+	//TextArea braucht dann zwei Knöpfe, Del und Trans, letzterer ist dann wür die Über
+	//setzung in dasselbe Fenster zuständig.
+	
+	
 	/**
 	 * Die Methode <code>main</code>
 	 */
@@ -61,8 +69,8 @@ public class Main {
 		// JFrame erstellen
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(600, 400);
-		frame.setMinimumSize(new Dimension(500, 300));
+		frame.setSize(660, 400);
+		frame.setMinimumSize(new Dimension(650, 400));
 		frame.setResizable(false);
 		frame.setLayout(new BorderLayout());
 
@@ -218,6 +226,95 @@ public class Main {
 			}
 		});
 
+		// JButton erstellen
+		JButton qButton = new JButton(I18N.getValue("Paste")); 
+		qButton.setMinimumSize(new Dimension(100, 30));
+
+		// ActionListener für den Button
+		qButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				  openPanel();
+			}
+
+		private void openPanel() {
+
+			
+        // Neues Panel erstellen
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setPreferredSize(new Dimension(300, 200));
+
+        // TextArea in die Mitte
+        JTextArea textArea = new JTextArea(5, 20);
+        panel.add(new JScrollPane(textArea), BorderLayout.CENTER);
+
+		
+		// Schriftart laden
+		try {
+
+			Font font = Font
+					.createFont(Font.TRUETYPE_FONT,
+							new java.io.File(
+									System.getProperty("user.dir") + "\\src\\ttfs\\NotoSansOldHungarian-Regular.ttf"))
+					.deriveFont(24f);
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			ge.registerFont(font);
+
+			textArea.setFont(font);
+
+					
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+        
+        // Button-Panel unten links
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        JButton btn1 = new JButton("Del");
+        btn1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				textArea.setText("");
+			}
+		});
+		
+        JButton btn2 = new JButton(I18N.getValue("Translate"));
+        btn2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String content = textArea.getText();
+				textArea.setText("");
+				if (content == null)
+					return;
+
+				content = Translator.translateToLatinEntireText(new StringBuilder(content)).toString();
+				
+				textArea.setText(content);
+			}
+        	
+        	
+        });
+        
+        buttonPanel.add(btn1);
+        buttonPanel.add(btn2);
+
+        panel.add(buttonPanel, BorderLayout.SOUTH);
+
+        // Neues Fenster/Dialog öffnen
+        JDialog dialog = new JDialog();
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.add(panel);
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+
+		});
+
+		
 		// Panels für bessere Anordnung
 		JPanel centerPanel = new JPanel(new GridLayout(2, 1));
 		centerPanel.add(topScrollPane);
@@ -230,6 +327,7 @@ public class Main {
 		bottomPanel.add(readButtonRunes);
 		bottomPanel.add(readButtonLatin);
 		bottomPanel.add(copyButton);
+		bottomPanel.add(qButton);
 
 		// Komponenten zum Frame hinzufügen
 		frame.add(centerPanel, BorderLayout.CENTER);

@@ -213,7 +213,7 @@ public class Main {
 					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 					StringSelection selection = new StringSelection(text);
 					clipboard.setContents(selection, null);
-					JOptionPane.showMessageDialog(frame, "Text wurde in die Zwischenablage kopiert!");
+					JOptionPane.showMessageDialog(frame,  I18N.getValue("TextCopy")); 
 				}
 			}
 		});

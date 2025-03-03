@@ -27,7 +27,7 @@ public class Translator {
 		// Arbeite bei der Hinübersetzung ins Lateinische mit Groß- bei der
 		// Herübersetzung mit Kleinbuchstaben.
 		TO_LATIN.put(" ", " ");
-		TO_LATIN.put("\"", "?"); //// TODO
+		TO_LATIN.put("\"", "?"); 
 		TO_LATIN.put("?", "?");
 		TO_LATIN.put(".", ".");
 		TO_LATIN.put("!", "!");
@@ -102,7 +102,7 @@ public class Translator {
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		TO_SZKLY.put(" ", " ");
-		TO_SZKLY.put("\"", "?"); //// TODO i18n.
+		TO_SZKLY.put("\"", "?");
 		TO_SZKLY.put("?", "?");
 		TO_SZKLY.put(".", ".");
 		TO_SZKLY.put("!", "!");
@@ -563,7 +563,7 @@ public class Translator {
 	/*
 	 * private static String punctuation(String str) {
 	 * 
-	 * ////TODO if(str.endsWith("?") || str.endsWith(".") || str.endsWith("!")) {
+	 * //// if(str.endsWith("?") || str.endsWith(".") || str.endsWith("!")) {
 	 * 
 	 * if (str == null || str.length() <= 1) { return str; } // Letztes Zeichen
 	 * extrahieren char lastChar = str.charAt(str.length() - 1); // Neues String mit

@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.im.InputContext;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -34,6 +35,8 @@ import i18n.I18n;
 import io.Reader;
 import log.MyLogger;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -74,12 +77,6 @@ public class Main {
 		JTextArea topTextArea = new JTextArea();
 		topTextArea.setEditable(false);
 		topTextArea.setBackground(Color.LIGHT_GRAY);
-
-		 LOGGER.info("Checking keyboard...");
-		
-        if(!KeyBoards.checkKeyBoard(topTextArea)) {
-        	return;
-        }
         
 		// Untere TextArea (bearbeitbar)
 		JTextArea bottomTextArea = new JTextArea();
@@ -119,11 +116,41 @@ public class Main {
 			    	
 			        String inputText = bottomTextArea.getText();
 			       
-			        if(inputText.length() > 1) {
+					 LOGGER.info("Checking keyboard...");
+						
+					 Locale locale = InputContext.getInstance().getLocale();
+			         String keyboard = checkKeyBoard(topTextArea, locale);
+			        
+			        if("QWERTZ".equals(keyboard) && inputText.length() > 1) {
 			            KeyBoards.simulateQwertzTyping(inputText);	
 			        }
 			        
+			        //TODO: Simulate for other layouts, too!
+			        
 			    }
+
+				private String checkKeyBoard(JTextArea topTextArea, Locale locale) {
+					List<String> qwertzLocales = Arrays.asList("de", "de_AT", "de_CH", "hu", "sl", "sk");
+			         List<String> qwertyLocales = Arrays.asList("en", "en_US", "en_GB", "en_AU", "en_CA");
+
+			         if (locale == null || (!qwertzLocales.contains(locale.getLanguage()) && !qwertyLocales.contains(locale.getLanguage()))) {
+			             topTextArea.append("⚠ Achtung: Unterstütztes Tastaturlayout nicht erkannt! Das Programm könnte nicht korrekt funktionieren.\n");
+			             return "";
+			         }
+
+			         if (qwertzLocales.contains(locale.getLanguage())) {
+			        	 
+			             return "QWERTZ";
+			         
+			         } else if (qwertyLocales.contains(locale.getLanguage())) {
+			         
+			        	 return "QWERTY";
+			         
+			         }
+			         
+			         topTextArea.append("⚠ Achtung: Unterstütztes Tastaturlayout nicht erkannt! Das Programm könnte nicht korrekt funktionieren.\n");
+		             return "";
+				}
 			});
 			
 		} catch (Exception e) {

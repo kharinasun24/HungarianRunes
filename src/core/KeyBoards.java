@@ -8,21 +8,6 @@ import java.util.Locale;
 import javax.swing.JTextArea;
 
 public class KeyBoards {
-
-	
-	/**
-	 * Die Methode <code>checkKeyBoard</code> liefert bei einer qwertz-tastatur true zurück, ansonsten false. 
-	 * @param topTextArea
-	 * @return
-	 */
-	static boolean checkKeyBoard(JTextArea topTextArea) {
-		Locale locale = InputContext.getInstance().getLocale();
-        if (locale == null || !locale.getLanguage().equals("de")) {
-        	topTextArea.append("⚠ Achtung: QWERTZ-Tastatur nicht erkannt! Das Programm könnte nicht korrekt funktionieren.\n");
-           return false;
-        }
-        return true;
-	}
 	
 	/**
 	 * Die Methode <code>simulateQwertzTyping</code> kann tastatureingaben auf einer deutschen tastatur simulieren.
